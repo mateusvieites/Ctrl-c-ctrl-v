@@ -37,6 +37,8 @@ public class errorWindow extends JFrame {
 				fontSize = 18;
 				break;
 			case 3:
+				errorCode = "0003";
+				fontSize = 18;
 				break;
 			default:
 		}
