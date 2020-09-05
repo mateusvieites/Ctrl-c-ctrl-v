@@ -16,7 +16,7 @@ This is just a ctrl c ctrl v that automatically saves to a specific folder
 - Find another but this time the folder name is "Copy"
 - Enter again
 - Now you find the .txt file with the name settings, open it
-- Change de URL to save
+- Change URL to save
 
 # License
 Please see [LICENSE](https://github.com/mateusvieites/SchoolWork/blob/master/LICENSE)
