@@ -4,11 +4,11 @@
 This is just a ctrl c ctrl v that automatically saves to a specific folder
 
 # Stages
-- [x]Develop
-- [x]Implement
-- [x]Tests
-- []Improve
-- []Tests
+- [x] Develop
+- [x] Implement
+- [x] Tests
+- [ ] Improve
+- [ ] Tests
 
 # how to use
 - Acess your documents folder and you will find a folder with the name of "HardszVick"
