@@ -28,9 +28,31 @@ public class CopyFiles {
 		   BufferedReader in = new BufferedReader (new InputStreamReader(System.in));
 		   File src = new File(source);
 		   String destination = "D:\\Pastas\\Backups";
-		   File dst = new File(destination); 
+		   String folder = "D:\\Pastas\\Backups\\" + source.substring(source.lastIndexOf("\\") + 1);
+		   
+		   File newFolder = new File(folder);
+		   System.out.println(newFolder);
+		   
+		   if (!newFolder.exists()) {
+			   newFolder.mkdir();
+			}else {
+				char lastChar = folder.charAt(folder.length()-1);
+				
+				if(Character.isDigit(lastChar)) {
+					int oneMore = lastChar;
+					oneMore++;
+					folder = folder.substring(0, folder.length()-1) + oneMore;
+				}else {
+					folder = folder + "2";
+				}
+				
+				newFolder = new File(folder);
+				newFolder.mkdir();
+				System.out.println(newFolder);
+			}
+		   
+		   File dst = new File(folder); 
 		   copyDirectory(src, dst);
-
 	}
 	
 	private static void copyDirectory(File srcPath, File dstPath) throws IOException {
