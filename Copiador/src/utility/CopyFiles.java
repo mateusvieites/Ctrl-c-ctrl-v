@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,25 +27,40 @@ public class CopyFiles {
 
 	public static void Copy(String source) throws IOException {
 		boolean FlagError = false;
-		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		File src = new File(source);
+		String destination = "D:\\Pastas\\Backups";
 
 		/* toDO: method for text */
-		File documents = new File(System.getProperty("user.home") + File.separator + "Documents" + File.separator
+		File document = new File(System.getProperty("user.home") + File.separator + "Documents" + File.separator
 				+ "HardszVick" + File.separator + "copy");
-		if (documents.exists()) {
-			System.out.println(documents + " already exists");
-
-		} else if (documents.mkdirs()) {
+		if (document.exists()) {
+			try {
+				FileReader arq = new FileReader(System.getProperty("user.home") + File.separator + "Documents" + File.separator
+						+ "HardszVick" + File.separator + "copy" + File.separator + "settings.txt");
+			    BufferedReader lerArq = new BufferedReader(arq);
+			    String linha = lerArq.readLine();
+			    System.out.println(linha);
+			    destination = linha.substring(linha.lastIndexOf("=") + 1);
+			    System.out.println("Destinatario ausente: " + destination  +"\n");
+			    arq.close();
+			}catch(IOException e){
+				new errorWindow("Error when opening settings", 4);
+				/* toDo: Crash */
+			}
 			
+		} else if (document.mkdirs()) {
+			try {
 			FileWriter arq = new FileWriter(System.getProperty("user.home") + File.separator + "Documents" + File.separator
 					+ "HardszVick" + File.separator + "copy" + File.separator + "settings.txt");
-			
 		    PrintWriter gravarArq = new PrintWriter(arq);
-
-		    gravarArq.printf("+--Resultado--+%n");
+		    destination = "D:\\Pastas\\Backups";
+		    gravarArq.printf("BackupPath="+ destination);
+		    arq.close();
+			}catch(IOException e) {
+				new errorWindow("Error creating settings path", 5);
+			}
 		} else {
-			System.out.println(documents + " was not created");
+			System.out.println(document + " was not created");
 			new errorWindow("Error creating directory", 3);
 			FlagError = true;
 		}
@@ -52,8 +68,7 @@ public class CopyFiles {
 		/*                      */
 
 		if (!FlagError) {
-			String destination = "D:\\Pastas\\Backups";
-			String folder = "D:\\Pastas\\Backups\\" + source.substring(source.lastIndexOf("\\") + 1);
+			String folder = destination + File.separator + source.substring(source.lastIndexOf("\\") + 1);
 
 			File newFolder = new File(folder);
 			System.out.println(newFolder);

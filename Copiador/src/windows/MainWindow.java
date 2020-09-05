@@ -18,10 +18,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
-import javax.swing.JCheckBox;
 import javax.swing.JComponent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 public class MainWindow extends JFrame {

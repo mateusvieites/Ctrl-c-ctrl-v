@@ -1,6 +1,5 @@
 package windows;
 
-import java.awt.BorderLayout;
 import java.awt.Font;
 
 import javax.swing.JFrame;
@@ -16,17 +15,27 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.awt.event.ActionEvent;
 
 public class errorWindow extends JFrame {
 
+	/**
+	 * 
+	 */
 	private JPanel contentPane;
 
 	public errorWindow(String error, int option) {
 		int fontSize = 0;
 		String errorCode = "0";
+		boolean saveCrashReport = false;
+		
 		switch(option) {
 			case 1:
 				errorCode = "0001";
@@ -40,7 +49,44 @@ public class errorWindow extends JFrame {
 				errorCode = "0003";
 				fontSize = 18;
 				break;
+			case 4:
+				errorCode = "0004";
+				fontSize = 18;
+				break;
+			case 5:
+				errorCode = "0005";
+				fontSize = 18;
+			break;
 			default:
+				break;
+		}
+		
+		File document = new File(System.getProperty("user.home") + File.separator + "Documents" + File.separator
+				+ "HardszVick" + File.separator + "copy" + File.separator + "crash-report");
+		if (document.exists()) {
+			saveCrashReport = true;
+		}else {
+				document.mkdirs();
+				saveCrashReport = true;
+		}
+		
+		if(saveCrashReport) {
+			Calendar dateTime = Calendar.getInstance();
+			SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy_HH-mm-ss");
+			System.out.println("C: " + sdf.format(dateTime.getTime()));
+			
+			try {
+				FileWriter arq = new FileWriter(document + File.separator +  "crash-" + sdf.format(dateTime.getTime())+ ".txt");
+			    PrintWriter gravarArq = new PrintWriter(arq);
+			    
+			    gravarArq.printf("------Crash Report----- \n "
+			    	+ "Time: " + sdf.format(dateTime.getTime()) + "\n"
+			    	+ "Error Code: " + errorCode + "\n" + 
+			    	"Description: " + error);
+			    arq.close();
+				}catch(IOException e) {
+					new errorWindow("Error creating settings path", 5);
+				}
 		}
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
