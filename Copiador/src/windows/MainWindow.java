@@ -1,11 +1,12 @@
 package windows;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import utility.CopyFiles;
+
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.JLabel;
@@ -15,16 +16,19 @@ import javax.swing.InputMap;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 
 public class MainWindow extends JFrame {
 
+	private String version = "V 0.2";
 	private JPanel contentPane;
 	private JTextField url_txtf;
 
 	public MainWindow() {
+		setTitle("HardszVick " + version);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 386, 116);
 		contentPane = new JPanel();
@@ -47,10 +51,15 @@ public class MainWindow extends JFrame {
 		JButton copy_button = new JButton("Copy");
 		copy_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				checkError();
+				try {
+					checkError();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
-		copy_button.setBounds(92, 38, 89, 23);
+		copy_button.setBounds(28, 42, 89, 23);
 		contentPane.add(copy_button);
 		
 		InputMap inputMap = this.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
@@ -58,21 +67,21 @@ public class MainWindow extends JFrame {
 		this.getRootPane().getActionMap().put("forward", new AbstractAction(){
 		    @Override
 		    public void actionPerformed(ActionEvent arg0) {
-		        checkError();
+		        try {
+					checkError();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 		    }
 		});
-		
-		JCheckBox allFiles_CheckBox = new JCheckBox("All files");
-		allFiles_CheckBox.setBounds(10, 38, 76, 23);
-		contentPane.add(allFiles_CheckBox);
 	}
 	
-	private void checkError() {
+	private void checkError() throws IOException {
 		
 		if(url_txtf.getText() == null || url_txtf.getText().trim().equals("")) {
 			new errorWindow("Please, insert a URL",1).setVisible(true);
 		}else {
-			/* copyFile(); */
+			CopyFiles.Copy(url_txtf.getText());
 		}
 	}
 }
