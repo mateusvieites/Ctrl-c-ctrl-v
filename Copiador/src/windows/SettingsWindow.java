@@ -28,6 +28,7 @@ public class SettingsWindow extends JFrame{
 	public SettingsWindow() {
 		File file = new File(System.getProperty("user.home") + File.separator + "Documents" + File.separator
 		+ "HardszVick" + File.separator + "copy" + File.separator + "settings.txt");
+		
 		if(file.exists()) {
 			
 		}
