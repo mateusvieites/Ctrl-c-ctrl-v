@@ -24,14 +24,11 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.awt.event.ActionEvent;
 
-public class errorWindow extends JFrame {
+public class ErrorWindow extends JFrame {
 
-	/**
-	 * 
-	 */
 	private JPanel contentPane;
 
-	public errorWindow(String error, int option) {
+	public ErrorWindow(String error, int option) {
 		int fontSize = 0;
 		String errorCode = "0";
 		boolean saveCrashReport = false;
@@ -85,7 +82,7 @@ public class errorWindow extends JFrame {
 			    	"Description: " + error);
 			    arq.close();
 				}catch(IOException e) {
-					new errorWindow("Error creating settings path", 5);
+					new ErrorWindow("Error creating settings path", 5);
 				}
 		}
 		

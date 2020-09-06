@@ -12,7 +12,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 
-import windows.errorWindow;
+import windows.ErrorWindow;
 
 public class CopyFiles {
 
@@ -41,10 +41,9 @@ public class CopyFiles {
 			    String linha = lerArq.readLine();
 			    System.out.println(linha);
 			    destination = linha.substring(linha.lastIndexOf("=") + 1);
-			    System.out.println("Destinatario ausente: " + destination  +"\n");
 			    arq.close();
 			}catch(IOException e){
-				new errorWindow("Error when opening settings", 4);
+				new ErrorWindow("Error when opening settings", 4);
 				/* toDo: Crash */
 			}
 			
@@ -57,11 +56,11 @@ public class CopyFiles {
 		    gravarArq.printf("BackupPath="+ destination);
 		    arq.close();
 			}catch(IOException e) {
-				new errorWindow("Error creating settings path", 5);
+				new ErrorWindow("Error creating settings path", 5);
 			}
 		} else {
 			System.out.println(document + " was not created");
-			new errorWindow("Error creating directory", 3);
+			new ErrorWindow("Error creating directory", 3);
 			FlagError = true;
 		}
 
@@ -110,7 +109,7 @@ public class CopyFiles {
 			}
 		} else {
 			if (!srcPath.exists()) {
-				new errorWindow("URL does not exist", 2).setVisible(true);
+				new ErrorWindow("URL does not exist", 2).setVisible(true);
 			} else {
 				InputStream in = new FileInputStream(srcPath);
 				OutputStream out = new FileOutputStream(dstPath);
