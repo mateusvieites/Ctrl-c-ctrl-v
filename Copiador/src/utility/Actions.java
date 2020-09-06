@@ -11,6 +11,7 @@ import javax.print.attribute.standard.Destination;
 import javax.swing.JFileChooser;
 
 import windows.ErrorWindow;
+import windows.SettingsWindow;
 
 public class Actions {
 	private static Actions uniqueInstance;
@@ -23,7 +24,7 @@ public class Actions {
 		return uniqueInstance;
 	}
 	
-	public static void read(String urlTxT) {
+	public static String read(String urlTxT) {
 		try {
 			FileReader arq = new FileReader(urlTxT);
 		    BufferedReader lerArq = new BufferedReader(arq);
@@ -31,21 +32,16 @@ public class Actions {
 		    System.out.println(linha);
 		    destination = linha.substring(linha.lastIndexOf("=") + 1);
 		    arq.close();
+		    return destination;
 		}catch(IOException e){
 			new ErrorWindow("Error when opening settings", 4);
+			return null;
 		}
 	}
 	
 	public static void createSettings(String urlTxt) {
-		try {
-			FileWriter arq = new FileWriter(urlTxt);
-		    PrintWriter gravarArq = new PrintWriter(arq);
-		    
-		    gravarArq.printf("BackupPath="+ destination);
-		    arq.close();
-			}catch(IOException e) {
-				new ErrorWindow("Error creating settings path", 5);
-			}
+		new SettingsWindow().setVisible(true);		
+		
 	}
 	
 	public static void checkError(String url, boolean flagNull) {

@@ -41,30 +41,20 @@ public class MainWindow extends JFrame{
 	
 
 	public MainWindow() {
+		
 		File document = new File(System.getProperty("user.home") + File.separator + "Documents" + File.separator
 				+ "HardszVick" + File.separator + "copy");
 			
 		String to = System.getProperty("user.home") + File.separator + "Documents" + File.separator
 				+ "HardszVick" + File.separator + "copy" + File.separator + "settings.txt";
+		
 		if (document.exists()) {
 					Actions.read(to);
 			}else if (document.mkdirs()) {
 				Actions.createSettings(to);	
-			} else if (document.mkdirs()) {
-				try {
-				FileWriter arq = new FileWriter(System.getProperty("user.home") + File.separator + "Documents" + File.separator
-						+ "HardszVick" + File.separator + "copy" + File.separator + "settings.txt");
-			    PrintWriter gravarArq = new PrintWriter(arq);
-			    destination = "D:\\Pastas\\Backups";
-			    gravarArq.printf("BackupPath="+ destination);
-			    arq.close();
-				}catch(IOException e) {
-					new ErrorWindow("Error creating settings path", 5);
-				}
 			} else {
 				System.out.println(document + " was not created");
 				new ErrorWindow("Error creating directory", 3);
-				FlagError = true;
 			}
 		
 		setTitle("HardszVick " + version);

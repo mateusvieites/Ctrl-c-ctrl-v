@@ -44,7 +44,6 @@ public class CopyFiles {
 			    arq.close();
 			}catch(IOException e){
 				new ErrorWindow("Error when opening settings", 4);
-				/* toDo: Crash */
 			}
 			
 		} else if (document.mkdirs()) {
