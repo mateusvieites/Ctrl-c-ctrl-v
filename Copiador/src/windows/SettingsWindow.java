@@ -36,6 +36,7 @@ public class SettingsWindow extends JFrame{
 	String urlBackup = null;
 	
 	public SettingsWindow() {
+		setTitle("Settings");
 		String txt = System.getProperty("user.home") + File.separator + "Documents" + File.separator
 				+ "HardszVick" + File.separator + "copy" + File.separator + "settings.txt";
 		
